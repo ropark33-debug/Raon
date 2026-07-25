@@ -1,0 +1,4 @@
+# Track only the requested HTML file and this ignore file.
+*.html
+!.gitignore
+!라온.html
