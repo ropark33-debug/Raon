@@ -1,18 +1,21 @@
-```html
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>라온의 학습 아카이브 | 코딩 & 수학 공부방</title>
-
+  
   <!-- Font Integration -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-
+  
   <style>
+    /* ==========================================
+       1. Core Design System & Theme Variables
+       ========================================== */
     :root {
+      /* Dark Theme (Default) */
       --bg-primary: #0a0b10;
       --bg-secondary: #12131a;
       --surface: rgba(255, 255, 255, 0.03);
@@ -21,19 +24,21 @@
       --border-hover: rgba(99, 102, 241, 0.4);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-
-      --primary: #6366f1;
+      
+      /* Accents */
+      --primary: #6366f1; /* Indigo */
       --primary-glow: rgba(99, 102, 241, 0.15);
-      --secondary: #06b6d4;
+      --secondary: #06b6d4; /* Cyan */
       --secondary-glow: rgba(6, 182, 212, 0.15);
-      --accent-math: #f43f5e;
+      --accent-math: #f43f5e; /* Rose */
       --accent-math-glow: rgba(244, 63, 94, 0.15);
-
+      
       --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
       --transition-speed: 0.3s;
     }
 
     [data-theme="light"] {
+      /* Light Theme */
       --bg-primary: #f8fafc;
       --bg-secondary: #ffffff;
       --surface: rgba(15, 23, 42, 0.02);
@@ -42,17 +47,18 @@
       --border-hover: rgba(99, 102, 241, 0.3);
       --text-main: #0f172a;
       --text-muted: #475569;
-
+      
       --primary: #4f46e5;
       --primary-glow: rgba(79, 70, 229, 0.08);
       --secondary: #0891b2;
       --secondary-glow: rgba(8, 145, 178, 0.08);
       --accent-math: #db2777;
       --accent-math-glow: rgba(219, 39, 119, 0.08);
-
+      
       --card-shadow: 0 10px 30px 0 rgba(148, 163, 184, 0.15);
     }
 
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -69,6 +75,7 @@
       position: relative;
     }
 
+    /* Ambient Background Blobs */
     .bg-blobs {
       position: fixed;
       top: 0;
@@ -129,6 +136,7 @@
       100% { transform: translate(-60px, -90px) scale(0.9); }
     }
 
+    /* Layout Containers */
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -137,6 +145,9 @@
       z-index: 1;
     }
 
+    /* ==========================================
+       2. Navigation Bar
+       ========================================== */
     header {
       display: flex;
       justify-content: space-between;
@@ -188,6 +199,7 @@
       gap: 1rem;
     }
 
+    /* Theme Toggle Switch */
     .theme-toggle-btn {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -217,6 +229,9 @@
       stroke-linejoin: round;
     }
 
+    /* ==========================================
+       3. Hero Profile Dashboard
+       ========================================== */
     .hero-dashboard {
       background: var(--surface);
       backdrop-filter: blur(16px);
@@ -335,6 +350,9 @@
       font-weight: 600;
     }
 
+    /* ==========================================
+       4. Math Playground Styles
+       ========================================== */
     .playground-tabs {
       display: flex;
       gap: 0.75rem;
@@ -415,6 +433,9 @@
       box-shadow: 0 0 8px var(--accent-math-glow);
     }
 
+    /* ==========================================
+       5. Filter Controls & Search Bar
+       ========================================== */
     .controls-row {
       display: flex;
       justify-content: space-between;
@@ -504,6 +525,9 @@
       height: 18px;
     }
 
+    /* ==========================================
+       6. Dynamic Material Card Grid
+       ========================================== */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -529,7 +553,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 380px;
+      height: 380px; /* Fixed height for clean grid layout */
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
       cursor: pointer;
       position: relative;
@@ -541,6 +565,7 @@
       box-shadow: var(--card-shadow);
     }
 
+    /* Abstract Visual Block to mimic thumbnail */
     .card-visual {
       height: 140px;
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1));
@@ -575,6 +600,7 @@
       transform: scale(1.15) rotate(5deg);
     }
 
+    /* Floating Tags inside card visual */
     .tag-badge {
       position: absolute;
       top: 1rem;
@@ -627,7 +653,7 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      margin-bottom: auto;
+      margin-bottom: auto; /* Push metadata to bottom */
     }
 
     .card-footer {
@@ -663,6 +689,9 @@
       stroke-width: 2.5;
     }
 
+    /* ==========================================
+       7. Interactive Detail Modal (Lightbox)
+       ========================================== */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -769,6 +798,7 @@
       letter-spacing: -0.5px;
     }
 
+    /* Modal Navigation Tabs */
     .modal-tabs {
       display: flex;
       border-bottom: 1px solid var(--border);
@@ -894,6 +924,7 @@
       text-decoration: underline;
     }
 
+    /* Embedded Code Structure */
     .code-container {
       background: #050608;
       border: 1px solid var(--border);
@@ -926,88 +957,9 @@
       white-space: pre;
     }
 
-    .play-preview-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-    }
-
-    .play-preview-canvas {
-      width: 100%;
-      max-width: 360px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: #000;
-      display: block;
-    }
-
-    .calculator-shell {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      width: 100%;
-      max-width: 360px;
-    }
-
-    .calculator-display {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 1rem 1.1rem;
-      min-height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      color: var(--text-main);
-      font-size: 2rem;
-      font-weight: 700;
-      word-break: break-all;
-    }
-
-    .calculator-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.75rem;
-    }
-
-    .calc-button {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text-main);
-      border-radius: 14px;
-      font-size: 1rem;
-      font-weight: 700;
-      padding: 0.95rem 0.85rem;
-      cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-    }
-
-    .calc-button:hover {
-      transform: translateY(-1px);
-      background: var(--surface-hover);
-    }
-
-    .calc-button.operator {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .calc-button.equal {
-      background: var(--secondary);
-      color: #fff;
-      grid-column: span 2;
-    }
-
-    .play-preview-note {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
+    /* ==========================================
+       8. Footer Section
+       ========================================== */
     footer {
       margin-top: 6rem;
       padding: 2.5rem 0;
@@ -1032,6 +984,7 @@
       text-decoration: underline;
     }
 
+    /* Empty state style */
     .empty-state {
       grid-column: 1 / -1;
       text-align: center;
@@ -1045,6 +998,7 @@
       margin-bottom: 1rem;
     }
 
+    /* Responsive scaling */
     @media (max-width: 768px) {
       header {
         margin-bottom: 2rem;
@@ -1072,6 +1026,7 @@
 </head>
 <body>
 
+  <!-- Background Animated Blobs -->
   <div class="bg-blobs">
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
@@ -1079,7 +1034,8 @@
   </div>
 
   <div class="container">
-
+    
+    <!-- Navigation Bar -->
     <header>
       <div class="logo-area">
         <div class="logo-icon">R</div>
@@ -1088,23 +1044,25 @@
           <p>러닝 아카이브 & 포트폴리오</p>
         </div>
       </div>
-
+      
       <div class="action-controls">
         <button class="theme-toggle-btn" id="themeToggle" title="테마 변경">
           <svg id="themeIcon" viewBox="0 0 24 24">
+            <!-- Default Moon Icon (indicating Dark Mode Active) -->
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
       </div>
     </header>
 
+    <!-- Hero Profile Dashboard -->
     <section class="hero-dashboard">
       <div class="hero-content">
         <div class="profile-avatar">🦖</div>
         <div class="profile-info">
           <h2><span>라온이의</span> 코딩 & 수학 공부방</h2>
           <p>
-            파이썬(Python)으로 만든 재미있는 게임 코드와 차근차근 공부한 수학 연산 자료들을 한자리에 모았습니다.
+            파이썬(Python)으로 만든 재미있는 게임 코드와 차근차근 공부한 수학 연산 자료들을 한자리에 모았습니다. 
             배우고 성장하는 기록을 살펴보세요!
           </p>
         </div>
@@ -1121,6 +1079,7 @@
       </div>
     </section>
 
+    <!-- Math Playground Dashboard -->
     <section class="hero-dashboard" style="margin-bottom: 4rem;">
       <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
         <span>📐 실시간 수학 놀이터 (Math Playground)</span>
@@ -1131,7 +1090,8 @@
         <button class="pg-tab-btn" id="pg-tab-sumloop" onclick="switchPlaygroundTab('sumloop')">🔄 누적합 루프</button>
         <button class="pg-tab-btn" id="pg-tab-turtlerun" onclick="switchPlaygroundTab('turtlerun')">🐢 터틀런 게임</button>
       </div>
-
+      
+      <!-- Multiplication Quiz -->
       <div id="pg-quiz" class="playground-content active">
         <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
           <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center;">랜덤으로 구구단 문제가 출제됩니다! 10문제에 도전해 보세요.</p>
@@ -1147,7 +1107,8 @@
           <button id="quiz-restart-btn" onclick="startQuiz()" class="filter-btn active" style="display: none; border-radius: 12px; margin-top: 1rem; background: var(--secondary); border-color: var(--secondary);">다시 시작 🔄</button>
         </div>
       </div>
-
+      
+      <!-- Even / Odd Visualizer -->
       <div id="pg-evenodd" class="playground-content">
         <div style="display: flex; flex-direction: column; gap: 1.25rem; align-items: center;">
           <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center;">임의의 숫자를 입력하면 2개씩 짝을 지어 짝수인지 홀수인지 분석합니다.</p>
@@ -1157,10 +1118,12 @@
           </div>
           <div id="evenodd-result" style="font-size: 1.25rem; font-weight: 700; color: var(--secondary);">6은 짝수(Even)입니다! (2로 나누어떨어집니다)</div>
           <div id="evenodd-dots" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 480px; background: rgba(0,0,0,0.15); padding: 1.5rem; border-radius: 18px; border: 1px solid var(--border); min-height: 80px; width: 100%;">
+            <!-- Visual dot pairs -->
           </div>
         </div>
       </div>
-
+      
+      <!-- Accumulative Sum Loop Simulator -->
       <div id="pg-sumloop" class="playground-content">
         <div style="display: flex; flex-direction: column; gap: 1.25rem; align-items: center;">
           <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center;">파이썬의 <code>for loop</code> 구조를 눈으로 공부해보세요. 합계가 쌓이는 연산 과정을 구현합니다.</p>
@@ -1169,12 +1132,12 @@
             <input type="number" id="sumloop-input" class="search-input" style="text-align: center; font-size: 1.1rem; width: 90px; padding: 0.5rem; border-radius: 12px;" value="10" min="1" max="30">
             <button id="sumloop-start-btn" onclick="startSumLoop()" class="filter-btn active" style="border-radius: 12px;">시작</button>
           </div>
-
+          
           <div id="sumloop-controls" style="display: none; gap: 0.5rem;">
             <button onclick="stepSumLoop()" class="filter-btn active" style="border-radius: 12px; background: var(--secondary); border-color: var(--secondary);">다음 루프 단계 실행 ➡️</button>
             <button onclick="resetSumLoop()" class="filter-btn" style="border-radius: 12px; background: var(--accent-math); color: white; border-color: var(--accent-math);">초기화</button>
           </div>
-
+          
           <div style="width: 100%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 0.5rem;">
             <div style="background: rgba(0,0,0,0.15); padding: 1.25rem; border-radius: 18px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center;">
               <h4 style="font-size: 0.95rem; color: var(--primary); margin-bottom: 0.75rem; font-weight: 700;">💻 시뮬레이터 연산 상태</h4>
@@ -1194,6 +1157,7 @@
         </div>
       </div>
 
+      <!-- Turtle Run Live Game -->
       <div id="pg-turtlerun" class="playground-content">
         <div style="display: flex; flex-direction: column; gap: 1rem; align-items: center;">
           <p style="color: var(--text-muted); font-size: 0.95rem; text-align: center;">화면을 클릭하고 <strong>방향키(↑,↓,←,→)</strong>로 움직여 초록색 먹이를 먹으세요. 빨간 적 거북이를 피해야 합니다!</p>
@@ -1212,7 +1176,9 @@
       </div>
     </section>
 
+    <!-- Controls Row -->
     <section class="controls-row">
+      <!-- Filter Tags -->
       <div class="filters-wrapper" id="filtersContainer">
         <button class="filter-btn active" data-filter="all">전체</button>
         <button class="filter-btn" data-filter="coding">🎮 코딩 게임</button>
@@ -1220,6 +1186,7 @@
         <button class="filter-btn" data-filter="basic">💡 기초연산</button>
       </div>
 
+      <!-- Search Bar -->
       <div class="search-wrapper">
         <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="8"></circle>
@@ -1229,22 +1196,27 @@
       </div>
     </section>
 
+    <!-- Material Grid -->
     <main class="grid-container" id="gridContainer">
+      <!-- Dynamic cards injected here by JS -->
       <div class="empty-state" id="emptyState">
         <div class="empty-state-icon">🔍</div>
         <p>검색 결과와 매칭되는 자료가 없습니다.</p>
       </div>
     </main>
 
+    <!-- Footer -->
     <footer>
       <div>&copy; 2026 Raon's Study Lab. Designed with ❤️</div>
       <div>
         <span>배움의 여정은 멈추지 않습니다 | </span>
-        <a href="https://github.com/ropark33-debug/Raon" id="repoLink" target="_blank" rel="noopener">GitHub 저장소 (ropark33-debug/Raon)</a>
+        <a href="#" id="repoLink">workspace</a>
       </div>
     </footer>
+
   </div>
 
+  <!-- Detail Lightbox Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-container">
       <button class="modal-close-btn" id="modalClose" aria-label="닫기">
@@ -1253,7 +1225,7 @@
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-
+      
       <div class="modal-hero" id="modalHero">
         <div class="modal-hero-icon" id="modalHeroIcon">🎮</div>
         <div class="modal-title-area">
@@ -1262,18 +1234,19 @@
         </div>
       </div>
 
+      <!-- Navigation Tabs inside Modal -->
       <div class="modal-tabs">
         <button class="modal-tab-btn active" id="btn-tab-desc" onclick="switchModalTab('desc')">설명 보기</button>
         <button class="modal-tab-btn" id="btn-tab-code" onclick="switchModalTab('code')">파이썬 소스 코드</button>
-        <button class="modal-tab-btn" id="btn-tab-play" onclick="switchModalTab('play')">실행 미리보기</button>
       </div>
-
+      
       <div class="modal-body">
+        <!-- Tab 1: Description -->
         <div id="modal-tab-content-desc" class="modal-tab-content active">
           <p class="modal-desc" id="modalDesc">
             상세 설명이 여기에 들어갑니다.
           </p>
-
+          
           <div class="modal-details">
             <div class="detail-row">
               <span class="detail-label">카테고리</span>
@@ -1300,25 +1273,29 @@
           </div>
         </div>
 
+        <!-- Tab 2: Python Code Previewer -->
         <div id="modal-tab-content-code" class="modal-tab-content">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
             <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">🐍 파이썬 코드 리더</span>
             <button class="terminal-copy-btn" id="copyCodeBtn" style="font-size: 0.85rem; color: var(--secondary);">전체 코드 복사</button>
           </div>
           <div class="code-container">
+            <!-- Line numbers -->
             <div id="code-line-numbers" class="code-line-numbers"></div>
+            <!-- Highlighted code content -->
             <pre class="code-content-block"><code id="code-target"></code></pre>
           </div>
-        </div>
-
-        <div id="modal-tab-content-play" class="modal-tab-content">
-          <div id="play-preview-area" class="play-preview-shell"></div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    /* ==========================================
+       9. JavaScript - Data & Dynamic Behaviors
+       ========================================== */
+
+    // Study items database with embedded source codes
     const studyMaterials = [
       {
         id: 'turtle-run',
@@ -1342,12 +1319,14 @@ screen.bgcolor("orange")
 score = 0
 playing = False
 
+# Player
 player = t.Turtle()
 player.shape("turtle")
 player.color("white")
 player.penup()
 player.speed(0)
 
+# Enemy
 te = t.Turtle()
 te.shape("turtle")
 te.color("red")
@@ -1355,6 +1334,7 @@ te.penup()
 te.speed(0)
 te.goto(0, 200)
 
+# Star
 ts = t.Turtle()
 ts.shape("circle")
 ts.color("green")
@@ -1362,6 +1342,7 @@ ts.penup()
 ts.speed(0)
 ts.goto(0, -200)
 
+# Score writer
 writer = t.Turtle()
 writer.hideturtle()
 writer.penup()
@@ -1400,16 +1381,19 @@ def play():
 
     te.forward(speed)
 
+    # Enemy catches player
     if player.distance(te) < 15:
         message("Game Over", "Score: " + str(score))
         playing = False
         score = 0
         return
 
+    # Player gets star
     if player.distance(ts) < 15:
         score += 1
         writer.clear()
         writer.write("Score: " + str(score), align="center", font=("Arial", 16, "normal"))
+
         ts.goto(random.randint(-230, 230), random.randint(-230, 230))
 
     if playing:
@@ -1435,53 +1419,6 @@ message("Turtle Run", "Press SPACE to Start")
 screen.mainloop()`
       },
       {
-        id: 'chess-demo',
-        title: '체스 AI 학습판 (Chess AI)',
-        filename: 'CHESS.py',
-        category: 'coding',
-        tag: 'games',
-        tags: ['Game', 'Chess', 'AI', 'Python'],
-        icon: '♟️',
-        description: '브라우저에서 바로 확인할 수 있는 체스 보드 학습 미리보기입니다. 추천 수와 힌트 흐름을 상단에서 보여주며, 코드를 함께 보면서 공부할 수 있습니다.',
-        level: '중급',
-        status: '완료',
-        code: String.raw`import pygame
-import chess
-
-# 추천 수와 힌트 설명을 보여주는 체스 학습 모드
-# 브라우저용 미리보기에서는 보드 상태를 캔버스로 보여줍니다.`
-      },
-      {
-        id: 'gomoku-demo',
-        title: '오목 AI 학습판 (Gomoku AI)',
-        filename: 'pygame_gomoku_ai_mac.py',
-        category: 'coding',
-        tag: 'games',
-        tags: ['Game', 'Gomoku', 'AI', 'Python'],
-        icon: '⚫',
-        description: '오목 판을 브라우저 미리보기로 확인할 수 있는 학습형 보드 데모입니다. 돌을 놓는 위치와 흐름을 이해하기 쉽게 보여줍니다.',
-        level: '중급',
-        status: '완료',
-        code: String.raw`import pygame
-
-# 오목 판을 그리며 AI가 놓을 수 있는 위치를 표시하는 형태의 보드 학습 코드.`
-      },
-      {
-        id: 'sudoku-demo',
-        title: '스도쿠 학습판 (Sudoku)',
-        filename: 'pygame_sudoku_mac.py',
-        category: 'coding',
-        tag: 'games',
-        tags: ['Game', 'Sudoku', 'Logic', 'Python'],
-        icon: '🔢',
-        description: '스도쿠 숫자 배치를 브라우저에서 바로 확인할 수 있는 구조적 미리보기입니다. 숫자, 행열, 3x3 박스를 함께 보면서 패턴을 익힐 수 있습니다.',
-        level: '중급',
-        status: '완료',
-        code: String.raw`import pygame
-
-# 숫자 채우기 로직과 정답 패턴을 시각화하는 스도쿠 보드 데모.`
-      },
-      {
         id: 'crossyroads',
         title: '크로시 로드 (Crossy Roads)',
         filename: 'CROSSYROADS.py',
@@ -1502,6 +1439,7 @@ player_x = WIDTH // 2
 player_y = HEIGHT - 1
 score = 0
 
+# Create roads with cars
 roads = []
 for y in range(HEIGHT):
     cars = []
@@ -1516,7 +1454,7 @@ while True:
     print("=" * WIDTH)
 
     for y in range(HEIGHT):
-        row = [" "] * WIDTH
+        row = [" "] * width
         for car in roads[y]:
             row[car] = "🚗"
         if y == player_y:
@@ -1535,15 +1473,18 @@ while True:
     elif move == "d" and player_x < WIDTH - 1:
         player_x += 1
 
+    # Move cars
     for y in range(HEIGHT):
         roads[y] = [(x + 1) % WIDTH for x in roads[y]]
 
+    # Collision check
     if player_x in roads[player_y]:
         os.system("clear")
         print("💥 SPLAT!")
         print(f"Final Score: {score}")
         break
 
+    # Win condition
     if player_y == 0:
         os.system("clear")
         print("🎉 YOU CROSSED THE ROAD!")
@@ -2000,7 +1941,7 @@ for i in range(10):
     if c == a * b:
         print("정답")
         score = score + 1
-    else:
+    else: 
         print("오답")
     print("정답은", a * b)
 
@@ -2151,113 +2092,22 @@ def main():
 
 if __name__ == "__main__":
     main()`
-      },
-      {
-        id: 'meteo',
-        title: '메테오 피하기 (Meteo)',
-        filename: 'meteo.py',
-        category: 'coding',
-        tag: 'games',
-        tags: ['Game', 'Arcade', 'Python'],
-        icon: '☄️',
-        description: '하늘에서 떨어지는 메테오를 피하며 점수를 올리는 간단한 파이썬 게임입니다. 방향키로 캐릭터를 움직여 생존 시간을 늘려 보세요.',
-        level: '초중급',
-        status: '완료',
-        code: String.raw`import turtle as t
-import random
-
-screen = t.Screen()
-screen.title("Dodge the Meteors")
-screen.bgcolor("black")
-screen.setup(600, 600)
-screen.tracer(0)
-
-player = t.Turtle()
-player.shape("circle")
-player.color("cyan")
-player.penup()
-player.goto(0, -250)
-
-meteors = []
-
-for i in range(5):
-    meteor = t.Turtle()
-    meteor.shape("triangle")
-    meteor.color("brown")
-    meteor.penup()
-    meteor.goto(random.randint(-280, 280),
-                random.randint(100, 500))
-    meteors.append(meteor)
-
-score = 0
-game_over = False
-
-pen = t.Turtle()
-pen.hideturtle()
-pen.color("white")
-pen.penup()
-pen.goto(0, 260)
-
-def update_score():
-    pen.clear()
-    pen.write(f"Score: {score}", align="center",
-              font=("Arial", 16, "normal"))
-
-update_score()
-
-def left():
-    x = player.xcor() - 25
-    if x < -280:
-        x = -280
-    player.setx(x)
-
-def right():
-    x = player.xcor() + 25
-    if x > 280:
-        x = 280
-    player.setx(x)
-
-screen.listen()
-screen.onkeypress(left, "Left")
-screen.onkeypress(right, "Right")
-
-speed = 4
-
-while not game_over:
-    for meteor in meteors:
-        meteor.sety(meteor.ycor() - speed)
-
-    for meteor in meteors:
-        if meteor.ycor() < -300:
-            meteor.goto(random.randint(-280, 280), 300)
-            score += 1
-        update_score()
-
-    for meteor in meteors:
-        if player.distance(enemy) < 20:
-            game_over = True
-
-    screen.update()
-
-pen.goto(0, 0)
-pen.write("GAME OVER",
-          align="center",
-          font=("Arial", 28, "bold"))
-
-screen.mainloop()`
       }
     ];
 
+    // DOM Elements
     const gridContainer = document.getElementById('gridContainer');
     const emptyState = document.getElementById('emptyState');
     const searchInput = document.getElementById('searchInput');
     const filtersContainer = document.getElementById('filtersContainer');
     const codingCountEl = document.getElementById('codingCount');
     const mathCountEl = document.getElementById('mathCount');
-
+    
+    // Theme Switch Elements
     const themeToggleBtn = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
-
+    
+    // Modal Elements
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
     const modalHero = document.getElementById('modalHero');
@@ -2272,11 +2122,16 @@ screen.mainloop()`
     const copyBtn = document.getElementById('copyBtn');
     const copyCodeBtn = document.getElementById('copyCodeBtn');
 
+    // UI state
     let activeFilter = 'all';
     let searchQuery = '';
     let currentSelectedMaterial = null;
-    let activePreview = null;
 
+    // ==========================================
+    // Core Functions
+    // ==========================================
+
+    // Initialize Page Stats
     function initStats() {
       const codingCount = studyMaterials.filter(item => item.category === 'coding').length;
       const mathCount = studyMaterials.filter(item => item.category === 'math').length;
@@ -2284,17 +2139,18 @@ screen.mainloop()`
       mathCountEl.textContent = mathCount;
     }
 
+    // Render Cards Grid
     function renderGrid() {
       const cards = gridContainer.querySelectorAll('.card');
       cards.forEach(card => card.remove());
 
       const filtered = studyMaterials.filter(item => {
-        const matchesFilter =
-          activeFilter === 'all' ||
+        const matchesFilter = 
+          activeFilter === 'all' || 
           item.category === activeFilter ||
           item.tag === activeFilter;
-
-        const matchesSearch =
+          
+        const matchesSearch = 
           item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           item.filename.toLowerCase().includes(searchQuery.toLowerCase()) ||
           item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -2306,11 +2162,12 @@ screen.mainloop()`
         emptyState.style.display = 'block';
       } else {
         emptyState.style.display = 'none';
+        
         filtered.forEach(item => {
           const cardEl = document.createElement('div');
           cardEl.className = `card category-${item.category}`;
           cardEl.setAttribute('data-id', item.id);
-
+          
           cardEl.innerHTML = `
             <div class="card-visual">
               <span class="tag-badge">${item.level}</span>
@@ -2323,22 +2180,25 @@ screen.mainloop()`
               <div class="card-footer">
                 <span class="file-path">${item.filename}</span>
                 <span class="action-prompt">
-                  상세 & 코드
+                  상세 & 코드 
                   <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </span>
               </div>
             </div>
           `;
-
+          
           cardEl.addEventListener('click', () => openModal(item));
           gridContainer.appendChild(cardEl);
         });
       }
     }
 
+    // Filter Buttons Interactivity
     filtersContainer.addEventListener('click', (e) => {
       if (e.target.classList.contains('filter-btn')) {
-        filtersContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
         e.target.classList.add('active');
 
         activeFilter = e.target.getAttribute('data-filter');
@@ -2351,6 +2211,9 @@ screen.mainloop()`
       renderGrid();
     });
 
+    // ==========================================
+    // Light / Dark Mode Toggle
+    // ==========================================
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
@@ -2358,7 +2221,7 @@ screen.mainloop()`
     themeToggleBtn.addEventListener('click', () => {
       const currentTheme = document.documentElement.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
+      
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       updateThemeIcon(newTheme);
@@ -2384,22 +2247,30 @@ screen.mainloop()`
       }
     }
 
+    // ==========================================
+    // Math Playground Interactivity
+    // ==========================================
+
     function switchPlaygroundTab(tabId) {
+      // Deactivate all tabs & contents
       document.querySelectorAll('.pg-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.playground-content').forEach(content => content.classList.remove('active'));
-
+      
+      // Activate target tab & content
       document.getElementById(`pg-tab-${tabId}`).classList.add('active');
       document.getElementById(`pg-${tabId}`).classList.add('active');
-
+      
       if (tabId === 'turtlerun') {
         initTurtleRunGame();
       } else {
+        // Stop turtle run loops if user switches away
         trPlaying = false;
         if (trAnimationId) cancelAnimationFrame(trAnimationId);
         document.getElementById('tr-start-btn').style.display = 'block';
       }
     }
 
+    // -- 1. Multiplication Quiz Logic --
     let quizNum1 = 0;
     let quizNum2 = 0;
     let quizScore = 0;
@@ -2424,24 +2295,25 @@ screen.mainloop()`
         document.getElementById('quiz-restart-btn').style.display = 'block';
         return;
       }
-
+      
       quizCount++;
-      quizNum1 = Math.floor(Math.random() * 8) + 2;
-      quizNum2 = Math.floor(Math.random() * 9) + 1;
-
+      quizNum1 = Math.floor(Math.random() * 8) + 2; // 2 ~ 9
+      quizNum2 = Math.floor(Math.random() * 9) + 1; // 1 ~ 9
+      
       document.getElementById('quiz-question').textContent = `${quizNum1} x ${quizNum2} = ?`;
       document.getElementById('quiz-score').textContent = `진행: ${quizCount} / ${maxQuizQuestions} | 맞은 개수: ${quizScore}`;
       document.getElementById('quiz-input').value = '';
       document.getElementById('quiz-input').focus();
     }
 
+    // Check quiz answer
     function checkQuizAnswer() {
       if (quizCount > maxQuizQuestions || document.getElementById('quiz-input').disabled) return;
-
+      
       const userInput = parseInt(document.getElementById('quiz-input').value);
       const correctAnswer = quizNum1 * quizNum2;
       const feedbackEl = document.getElementById('quiz-feedback');
-
+      
       if (isNaN(userInput)) {
         feedbackEl.textContent = '숫자를 입력해 주세요!';
         feedbackEl.style.color = 'var(--accent-math)';
@@ -2456,7 +2328,8 @@ screen.mainloop()`
         feedbackEl.textContent = `❌ 아쉬워요! 정답은 ${correctAnswer}입니다.`;
         feedbackEl.style.color = 'var(--accent-math)';
       }
-
+      
+      // Wait 1.5 seconds and go to next question
       document.getElementById('quiz-input').disabled = true;
       setTimeout(() => {
         document.getElementById('quiz-input').disabled = false;
@@ -2465,33 +2338,35 @@ screen.mainloop()`
       }, 1500);
     }
 
+    // Bind Enter key to quiz input
     document.getElementById('quiz-input').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         checkQuizAnswer();
       }
     });
 
+    // -- 2. Even / Odd Visualizer --
     function visualizeEvenOdd() {
       const inputVal = parseInt(document.getElementById('evenodd-input').value);
       const resultEl = document.getElementById('evenodd-result');
       const dotsContainer = document.getElementById('evenodd-dots');
-
+      
       dotsContainer.innerHTML = '';
-
+      
       if (isNaN(inputVal) || inputVal < 1) {
         resultEl.textContent = '1 이상의 숫자를 입력해 주세요!';
         resultEl.style.color = 'var(--accent-math)';
         return;
       }
-
+      
       if (inputVal > 100) {
         resultEl.textContent = '시각화는 최대 100까지만 가능합니다!';
         resultEl.style.color = 'var(--accent-math)';
         return;
       }
-
+      
       const isEven = inputVal % 2 === 0;
-
+      
       if (isEven) {
         resultEl.textContent = `${inputVal}은 짝수(Even)입니다! (2개씩 완벽하게 짝이 맞습니다)`;
         resultEl.style.color = 'var(--secondary)';
@@ -2499,10 +2374,11 @@ screen.mainloop()`
         resultEl.textContent = `${inputVal}은 홀수(Odd)입니다! (1개가 홀로 남습니다)`;
         resultEl.style.color = 'var(--accent-math)';
       }
-
+      
+      // Draw dots
       const numPairs = Math.floor(inputVal / 2);
       const hasOdd = inputVal % 2 !== 0;
-
+      
       for (let i = 0; i < numPairs; i++) {
         const pairDiv = document.createElement('div');
         pairDiv.className = 'dot-pair';
@@ -2512,22 +2388,24 @@ screen.mainloop()`
         `;
         dotsContainer.appendChild(pairDiv);
       }
-
+      
       if (hasOdd) {
         const oddDiv = document.createElement('div');
         oddDiv.className = 'dot-pair';
         oddDiv.style.borderColor = 'var(--accent-math)';
         oddDiv.innerHTML = `
           <div class="dot rose"></div>
-          <div style="width:16px; height:16px; opacity:0.1;"></div>
+          <div style="width:16px; height:16px; opacity:0.1;"></div> <!-- placeholder -->
         `;
         dotsContainer.appendChild(oddDiv);
       }
     }
 
+    // -- 3. Sum Loop Simulator --
     let loopMax = 10;
     let currentLoopX = 0;
     let currentLoopSum = 0;
+    let loopInterval = null;
 
     function startSumLoop() {
       loopMax = parseInt(document.getElementById('sumloop-input').value);
@@ -2535,19 +2413,19 @@ screen.mainloop()`
         alert('N의 값은 1에서 30 사이로 정해주세요.');
         return;
       }
-
+      
       currentLoopX = 0;
       currentLoopSum = 0;
-
+      
       document.getElementById('sumloop-start-btn').style.display = 'none';
       document.getElementById('sumloop-controls').style.display = 'flex';
       document.getElementById('sumloop-input').disabled = true;
-
+      
       document.getElementById('sumloop-x').textContent = '-';
       document.getElementById('sumloop-sum').textContent = '0';
       document.getElementById('sumloop-progress').textContent = '준비 완료 (시작 전)';
       document.getElementById('sumloop-progress').style.color = 'var(--text-muted)';
-
+      
       const logContainer = document.getElementById('sumloop-log-lines');
       logContainer.innerHTML = '<div>s = 0 (초기화)</div>';
     }
@@ -2558,21 +2436,21 @@ screen.mainloop()`
         document.getElementById('sumloop-progress').style.color = '#10b981';
         return;
       }
-
+      
       currentLoopX++;
       const oldSum = currentLoopSum;
       currentLoopSum += currentLoopX;
-
+      
       document.getElementById('sumloop-x').textContent = currentLoopX;
       document.getElementById('sumloop-sum').textContent = currentLoopSum;
       document.getElementById('sumloop-progress').textContent = `동작 중 (${currentLoopX}단계 / ${loopMax}단계)`;
       document.getElementById('sumloop-progress').style.color = 'var(--secondary)';
-
+      
       const logContainer = document.getElementById('sumloop-log-lines');
       const stepLog = document.createElement('div');
       stepLog.innerHTML = `<span style="color:var(--text-muted)">[루프 #${currentLoopX}]</span> s = ${oldSum} + ${currentLoopX} ➔ <strong style="color:var(--accent-math)">${currentLoopSum}</strong>`;
       logContainer.appendChild(stepLog);
-
+      
       const logsBox = document.getElementById('sumloop-logs');
       logsBox.scrollTop = logsBox.scrollHeight;
 
@@ -2584,7 +2462,7 @@ screen.mainloop()`
         finalLog.innerHTML = `🏁 완료! 1부터 ${loopMax}까지의 총합: ${currentLoopSum}`;
         logContainer.appendChild(finalLog);
         logsBox.scrollTop = logsBox.scrollHeight;
-
+        
         document.getElementById('sumloop-progress').textContent = '루프 완전 종료! 🎉';
         document.getElementById('sumloop-progress').style.color = '#10b981';
       }
@@ -2593,19 +2471,20 @@ screen.mainloop()`
     function resetSumLoop() {
       currentLoopX = 0;
       currentLoopSum = 0;
-
+      
       document.getElementById('sumloop-start-btn').style.display = 'block';
       document.getElementById('sumloop-controls').style.display = 'none';
       document.getElementById('sumloop-input').disabled = false;
-
+      
       document.getElementById('sumloop-x').textContent = '-';
       document.getElementById('sumloop-sum').textContent = '0';
       document.getElementById('sumloop-progress').textContent = '준비 완료 (시작 전)';
       document.getElementById('sumloop-progress').style.color = 'var(--text-muted)';
-
+      
       document.getElementById('sumloop-log-lines').innerHTML = '시작 버튼을 누르면 루프 로그가 활성화됩니다.';
     }
 
+    // -- 4. Canvas-based Turtle Run game --
     let trCanvas, trCtx;
     let trPlayer = { x: 0, y: 0, heading: 0, speed: 6, size: 15 };
     let trEnemy = { x: 0, y: 150, heading: 0, speed: 4, size: 15 };
@@ -2630,7 +2509,7 @@ screen.mainloop()`
       trFood.y = (Math.random() * 240) - 120;
       trScore = 0;
       trPlaying = false;
-
+      
       if (trAnimationId) {
         cancelAnimationFrame(trAnimationId);
       }
@@ -2656,30 +2535,34 @@ screen.mainloop()`
     function updateTrPhysics() {
       const rad = (trPlayer.heading * Math.PI) / 180;
       trPlayer.x += Math.cos(rad) * trPlayer.speed;
-      trPlayer.y -= Math.sin(rad) * trPlayer.speed;
-
+      trPlayer.y -= Math.sin(rad) * trPlayer.speed; // Canvas y is downwards
+      
+      // Boundary check with wrap-around
       const halfW = trCanvas.width / 2;
       const halfH = trCanvas.height / 2;
       if (trPlayer.x > halfW) trPlayer.x = -halfW;
       if (trPlayer.x < -halfW) trPlayer.x = halfW;
       if (trPlayer.y > halfH) trPlayer.y = -halfH;
       if (trPlayer.y < -halfH) trPlayer.y = halfH;
-
+      
+      // Enemy follows Player
       const dx = trPlayer.x - trEnemy.x;
       const dy = trPlayer.y - trEnemy.y;
       trEnemy.heading = Math.atan2(-dy, dx);
-
-      const enemySpeed = Math.min(trScore + 5, 15) * 0.45;
+      
+      const enemySpeed = Math.min(trScore + 5, 15) * 0.45; // Match player scale physics
       trEnemy.x += Math.cos(trEnemy.heading) * enemySpeed;
       trEnemy.y -= Math.sin(trEnemy.heading) * enemySpeed;
-
+      
+      // Collision with Food (Star) - exactly < 15
       const distFood = Math.hypot(trPlayer.x - trFood.x, trPlayer.y - trFood.y);
       if (distFood < 15) {
         trScore++;
         trFood.x = (Math.random() * (trCanvas.width - 50)) - (trCanvas.width / 2 - 25);
         trFood.y = (Math.random() * (trCanvas.height - 50)) - (trCanvas.height / 2 - 25);
       }
-
+      
+      // Collision with Enemy (Game Over) - exactly < 15
       const distEnemy = Math.hypot(trPlayer.x - trEnemy.x, trPlayer.y - trEnemy.y);
       if (distEnemy < 15) {
         trPlaying = false;
@@ -2689,24 +2572,30 @@ screen.mainloop()`
     }
 
     function drawTrFrame() {
-      trCtx.fillStyle = '#ea580c';
+      // Clear with background color matching python setup (bgcolor="orange")
+      trCtx.fillStyle = '#ea580c'; // Orange background
       trCtx.fillRect(0, 0, trCanvas.width, trCanvas.height);
-
+      
       trCtx.save();
       trCtx.translate(trCanvas.width / 2, trCanvas.height / 2);
-
+      
       if (trPlaying) {
+        // Draw Food (green circle)
         trCtx.fillStyle = '#22c55e';
         trCtx.beginPath();
         trCtx.arc(trFood.x, trFood.y, trFood.size, 0, Math.PI * 2);
         trCtx.fill();
-
+        
+        // Draw Player (white turtle)
         drawTurtleShape(trPlayer.x, trPlayer.y, trPlayer.heading, '#ffffff');
+        
+        // Draw Enemy (red turtle)
         drawTurtleShape(trEnemy.x, trEnemy.y, trEnemy.heading * 180 / Math.PI, '#ef4444');
       }
-
+      
       trCtx.restore();
-
+      
+      // Draw Score overlay (matching exact text layout of Turtle writer)
       if (trPlaying) {
         trCtx.fillStyle = '#ffffff';
         trCtx.font = 'normal 16px Arial, sans-serif';
@@ -2715,13 +2604,15 @@ screen.mainloop()`
       } else {
         trCtx.fillStyle = '#ffffff';
         trCtx.textAlign = 'center';
-
+        
         if (trScore === 0) {
+          // Initial Screen
           trCtx.font = 'bold 20px Arial, sans-serif';
           trCtx.fillText('Turtle Run', trCanvas.width / 2, trCanvas.height / 2 - 20);
           trCtx.font = 'normal 15px Arial, sans-serif';
           trCtx.fillText('Press SPACE to Start', trCanvas.width / 2, trCanvas.height / 2 + 20);
         } else {
+          // Game Over Screen
           trCtx.font = 'bold 20px Arial, sans-serif';
           trCtx.fillText('Game Over', trCanvas.width / 2, trCanvas.height / 2 - 20);
           trCtx.font = 'normal 15px Arial, sans-serif';
@@ -2733,31 +2624,36 @@ screen.mainloop()`
     function drawTurtleShape(x, y, angleDegrees, color) {
       trCtx.save();
       trCtx.translate(x, y);
-      trCtx.rotate((-angleDegrees * Math.PI) / 180);
-
+      trCtx.rotate((-angleDegrees * Math.PI) / 180); // Invert rotation for canvas coords
+      
       trCtx.fillStyle = color;
+      
+      // Draw flippers
       trCtx.fillRect(-4, -12, 5, 24);
       trCtx.fillRect(3, -11, 4, 22);
-
+      
+      // Draw shell (circle)
       trCtx.beginPath();
       trCtx.arc(0, 0, 9, 0, Math.PI * 2);
       trCtx.fill();
-
+      
+      // Draw head (small circle)
       trCtx.beginPath();
       trCtx.arc(11, 0, 4.5, 0, Math.PI * 2);
       trCtx.fill();
-
+      
       trCtx.restore();
     }
 
+    // Canvas keyboard controller
     window.addEventListener('keydown', (e) => {
       const isTrTabActive = document.getElementById('pg-turtlerun').classList.contains('active');
-
+      
       if (isTrTabActive) {
         if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
-          e.preventDefault();
+          e.preventDefault(); // Stop page scrolling
         }
-
+        
         if (e.key === 'ArrowRight') trPlayer.heading = 0;
         if (e.key === 'ArrowUp') trPlayer.heading = 90;
         if (e.key === 'ArrowLeft') trPlayer.heading = 180;
@@ -2772,9 +2668,13 @@ screen.mainloop()`
       }
     });
 
+    // ==========================================
+    // Python Syntax Highlighter Function
+    // ==========================================
+
     function highlightPython(code) {
       if (!code) return '';
-
+      
       let escaped = code
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -2782,7 +2682,7 @@ screen.mainloop()`
 
       const tokens = [];
       let tokenIdx = 0;
-
+      
       function addToken(content, color, italic = false, bold = false) {
         const key = `___PYTOKEN_${tokenIdx++}___`;
         let style = `color: ${color};`;
@@ -2792,10 +2692,12 @@ screen.mainloop()`
         return key;
       }
 
+      // 1. Comments extraction (#...)
       escaped = escaped.replace(/(#[^\n]*)/g, (match) => {
         return addToken(match, '#64748b', true, false);
       });
 
+      // 2. String literals extraction ('...' & "...")
       escaped = escaped.replace(/("([^"\\]|\\.)*")/g, (match) => {
         return addToken(match, '#34d399');
       });
@@ -2803,15 +2705,17 @@ screen.mainloop()`
         return addToken(match, '#34d399');
       });
 
+      // 3. Highlight function definitions (def function_name)
       escaped = escaped.replace(/\bdef\s+([a-zA-Z_][a-zA-Z0-9_]*)/g, (match, funcName) => {
         const dToken = addToken('def', '#a78bfa', false, true);
         const fToken = addToken(funcName, '#60a5fa', false, true);
         return `${dToken} ${fToken}`;
       });
 
+      // 4. Highlight Python Keywords
       const keywords = [
-        'def', 'class', 'import', 'from', 'as', 'for', 'in', 'if', 'else', 'elif', 'while', 'try',
-        'except', 'raise', 'global', 'return', 'break', 'continue', 'print', 'True', 'False',
+        'def', 'class', 'import', 'from', 'as', 'for', 'in', 'if', 'else', 'elif', 'while', 'try', 
+        'except', 'raise', 'global', 'return', 'break', 'continue', 'print', 'True', 'False', 
         'None', 'and', 'or', 'not', 'is', 'lambda', 'with', 'pass', 'assert', 'self'
       ];
       keywords.forEach(keyword => {
@@ -2821,10 +2725,12 @@ screen.mainloop()`
         });
       });
 
+      // 5. Highlight Number tokens
       escaped = escaped.replace(/\b(\d+)\b/g, (match) => {
         return addToken(match, '#fb923c');
       });
 
+      // Restore placeholders in reverse
       for (let i = tokens.length - 1; i >= 0; i--) {
         escaped = escaped.replace(tokens[i].key, tokens[i].html);
       }
@@ -2832,31 +2738,30 @@ screen.mainloop()`
       return escaped;
     }
 
+    // ==========================================
+    // Modal View & Tab Control
+    // ==========================================
+
     function switchModalTab(tabId) {
+      // Toggle button active classes
       document.getElementById('btn-tab-desc').classList.remove('active');
       document.getElementById('btn-tab-code').classList.remove('active');
-      document.getElementById('btn-tab-play').classList.remove('active');
+      document.getElementById(`btn-tab-${tabId}`).classList.add('active');
 
-      document.getElementById('btn-tab-' + tabId).classList.add('active');
-
+      // Toggle content boxes
       document.getElementById('modal-tab-content-desc').style.display = 'none';
       document.getElementById('modal-tab-content-code').style.display = 'none';
-      document.getElementById('modal-tab-content-play').style.display = 'none';
+      document.getElementById(`modal-tab-content-${tabId}`).style.display = tabId === 'code' ? 'flex' : 'block';
 
-      if (tabId === 'code') {
-        document.getElementById('modal-tab-content-code').style.display = 'flex';
-      } else if (tabId === 'play') {
-        document.getElementById('modal-tab-content-play').style.display = 'block';
-        renderPlayPreview(currentSelectedMaterial);
-      } else {
-        document.getElementById('modal-tab-content-desc').style.display = 'block';
-      }
-
+      // Load code dynamic structure if switched to code tab
       if (tabId === 'code' && currentSelectedMaterial) {
         const codeTarget = document.getElementById('code-target');
         const lineNumbers = document.getElementById('code-line-numbers');
+        
+        // Highlight code
         codeTarget.innerHTML = highlightPython(currentSelectedMaterial.code);
-
+        
+        // Generate Line Numbers
         const lineCount = currentSelectedMaterial.code.split('\n').length;
         let linesHtml = '';
         for (let i = 1; i <= lineCount; i++) {
@@ -2864,924 +2769,20 @@ screen.mainloop()`
         }
         lineNumbers.innerHTML = linesHtml;
       }
-
-      if (tabId !== 'play') {
-        stopActivePreview();
-      }
     }
-
-    function stopActivePreview() {
-      if (activePreview?.rafId) {
-        cancelAnimationFrame(activePreview.rafId);
-      }
-      activePreview = null;
-    }
-
-    function renderPlayPreview(item) {
-      const container = document.getElementById('play-preview-area');
-      if (!container) return;
-
-      stopActivePreview();
-
-      if (!item) {
-        container.innerHTML = `
-          <div class="modal-details">
-            <div class="detail-row">
-              <span class="detail-label">상태</span>
-              <span class="detail-value">선택된 항목이 없습니다.</span>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      if (item.id === 'chess-demo') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <canvas id="chess-preview-canvas" class="play-preview-canvas" width="360" height="360"></canvas>
-            <div class="play-preview-note">체스 학습판 미리보기: 클릭한 칸을 기준으로 추천 수 흐름을 함께 보여주는 웹형 체스 데모입니다.</div>
-          </div>
-        `;
-        setTimeout(startChessPreview, 0);
-        return;
-      }
-
-      if (item.id === 'gomoku-demo') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <canvas id="gomoku-preview-canvas" class="play-preview-canvas" width="360" height="360"></canvas>
-            <div class="play-preview-note">오목 학습판 미리보기: 보드 위에서 수를 놓는 흐름을 웹에서 간단히 확인할 수 있습니다.</div>
-          </div>
-        `;
-        setTimeout(startGomokuPreview, 0);
-        return;
-      }
-
-      if (item.id === 'sudoku-demo') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <canvas id="sudoku-preview-canvas" class="play-preview-canvas" width="360" height="360"></canvas>
-            <div class="play-preview-note">스도쿠 학습판 미리보기: 숫자 배치와 3x3 구역을 시각적으로 확인하는 데모입니다.</div>
-          </div>
-        `;
-        setTimeout(startSudokuPreview, 0);
-        return;
-      }
-
-      if (item.id === 'meteo') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <canvas id="meteo-preview-canvas" class="play-preview-canvas" width="360" height="500"></canvas>
-            <div class="play-preview-note">메테오 미리보기: 방향키로 플레이하고 Enter로 다시 시작할 수 있습니다.</div>
-          </div>
-        `;
-        setTimeout(startMeteoPreview, 0);
-        return;
-      }
-
-      if (item.id === 'crossyroads') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <canvas id="crossyroads-preview-canvas" class="play-preview-canvas" width="360" height="420"></canvas>
-            <div class="play-preview-note">크로시 로드 미리보기: 방향키로 닭을 움직여 도로를 안전하게 건너세요. Enter 키로 다시 시작할 수 있습니다.</div>
-          </div>
-        `;
-        setTimeout(startCrossyRoadPreview, 0);
-        return;
-      }
-
-      if (item.id === 'calculator') {
-        container.innerHTML = `
-          <div class="play-preview-shell">
-            <div class="calculator-shell">
-              <div id="calc-display" class="calculator-display">0</div>
-              <div class="calculator-grid">
-                <button class="calc-button operator" data-value="clear">C</button>
-                <button class="calc-button operator" data-value="back">←</button>
-                <button class="calc-button operator" data-value="%">%</button>
-                <button class="calc-button operator" data-value="/">÷</button>
-                <button class="calc-button" data-value="7">7</button>
-                <button class="calc-button" data-value="8">8</button>
-                <button class="calc-button" data-value="9">9</button>
-                <button class="calc-button operator" data-value="*">×</button>
-                <button class="calc-button" data-value="4">4</button>
-                <button class="calc-button" data-value="5">5</button>
-                <button class="calc-button" data-value="6">6</button>
-                <button class="calc-button operator" data-value="-">−</button>
-                <button class="calc-button" data-value="1">1</button>
-                <button class="calc-button" data-value="2">2</button>
-                <button class="calc-button" data-value="3">3</button>
-                <button class="calc-button operator" data-value="+">+</button>
-                <button class="calc-button" data-value="0" style="grid-column: span 2;">0</button>
-                <button class="calc-button" data-value=".">.</button>
-                <button class="calc-button equal" data-value="equals">=</button>
-              </div>
-            </div>
-            <div class="play-preview-note">실제 계산이 가능한 인터랙티브 계산기입니다.</div>
-          </div>
-        `;
-        setTimeout(startCalculatorUI, 0);
-        return;
-      }
-
-      const previewType = item.category === 'math' ? 'math' : 'coding';
-      const previewLabel = previewType === 'math'
-        ? '숫자 연산과 흐름을 간단하게 시각화한 미리보기입니다.'
-        : '게임의 분위기를 간단히 보여주는 미니 미리보기입니다.';
-
-      container.innerHTML = `
-        <div class="play-preview-shell">
-          <canvas id="generic-preview-canvas" class="play-preview-canvas" width="360" height="280"></canvas>
-          <div class="play-preview-note">
-            ${previewLabel}
-            <br>현재 선택된 항목: ${item.title}
-          </div>
-        </div>
-      `;
-
-      setTimeout(() => startGenericPreview(item), 0);
-    }
-
-    function startChessPreview() {
-      const canvas = document.getElementById('chess-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-      activePreview = {
-        type: 'chess',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        selectedSquare: null,
-        recommendation: {
-          from: 'e2',
-          to: 'e4',
-          explanation: '초반은 중앙을 펼치고 기물을 빠르게 전개하는 것이 좋아요.'
-        }
-      };
-
-      drawChessPreview();
-
-      canvas.addEventListener('click', (event) => {
-        if (!activePreview || activePreview.type !== 'chess') return;
-        const rect = canvas.getBoundingClientRect();
-        const sx = Math.floor(((event.clientX - rect.left) / rect.width) * 8);
-        const sy = Math.floor(((event.clientY - rect.top) / rect.height) * 8);
-        activePreview.selectedSquare = `${String.fromCharCode(97 + sx)}${8 - sy}`;
-        drawChessPreview();
-      });
-    }
-
-    function startGomokuPreview() {
-      const canvas = document.getElementById('gomoku-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-      activePreview = {
-        type: 'gomoku',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        selectedCell: { x: 7, y: 7 }
-      };
-
-      drawGomokuPreview();
-
-      canvas.addEventListener('click', (event) => {
-        if (!activePreview || activePreview.type !== 'gomoku') return;
-        const rect = canvas.getBoundingClientRect();
-        const gx = Math.floor(((event.clientX - rect.left) / rect.width) * 15);
-        const gy = Math.floor(((event.clientY - rect.top) / rect.height) * 15);
-        activePreview.selectedCell = { x: Math.min(14, Math.max(0, gx)), y: Math.min(14, Math.max(0, gy)) };
-        drawGomokuPreview();
-      });
-    }
-
-    function drawGomokuPreview() {
-      if (!activePreview || activePreview.type !== 'gomoku') return;
-      const { canvas, ctx, selectedCell } = activePreview;
-      const cell = canvas.width / 15;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.strokeStyle = '#4b2e00';
-      ctx.lineWidth = 1.2;
-      for (let i = 0; i < 15; i++) {
-        ctx.beginPath();
-        ctx.moveTo(cell / 2 + i * cell, cell / 2);
-        ctx.lineTo(cell / 2 + i * cell, canvas.height - cell / 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(cell / 2, cell / 2 + i * cell);
-        ctx.lineTo(canvas.width - cell / 2, cell / 2 + i * cell);
-        ctx.stroke();
-      }
-
-      const corner = [3, 7, 11];
-      corner.forEach((v) => {
-        corner.forEach((w) => {
-          ctx.fillStyle = '#4b2e00';
-          ctx.beginPath();
-          ctx.arc((v + 1) * cell, (w + 1) * cell, 3, 0, Math.PI * 2);
-          ctx.fill();
-        });
-      });
-
-      ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(selectedCell.x * cell + 2, selectedCell.y * cell + 2, cell - 4, cell - 4);
-
-      ctx.fillStyle = '#111827';
-      ctx.beginPath();
-      ctx.arc(selectedCell.x * cell + cell / 2, selectedCell.y * cell + cell / 2, 12, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#f8fafc';
-      ctx.beginPath();
-      ctx.arc(selectedCell.x * cell + cell / 2, selectedCell.y * cell + cell / 2, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#0f172a';
-      ctx.font = 'bold 15px sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText('오목 보드 미리보기', 12, canvas.height - 16);
-    }
-
-    function startSudokuPreview() {
-      const canvas = document.getElementById('sudoku-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-      activePreview = {
-        type: 'sudoku',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        selectedCell: { x: 0, y: 0 }
-      };
-
-      drawSudokuPreview();
-
-      canvas.addEventListener('click', (event) => {
-        if (!activePreview || activePreview.type !== 'sudoku') return;
-        const rect = canvas.getBoundingClientRect();
-        const gx = Math.floor(((event.clientX - rect.left) / rect.width) * 9);
-        const gy = Math.floor(((event.clientY - rect.top) / rect.height) * 9);
-        activePreview.selectedCell = { x: Math.min(8, Math.max(0, gx)), y: Math.min(8, Math.max(0, gy)) };
-        drawSudokuPreview();
-      });
-    }
-
-    function drawSudokuPreview() {
-      if (!activePreview || activePreview.type !== 'sudoku') return;
-      const { canvas, ctx, selectedCell } = activePreview;
-      const cell = canvas.width / 9;
-      const board = [
-        [5, 3, 0, 0, 7, 0, 0, 0, 0],
-        [6, 0, 0, 1, 9, 5, 0, 0, 0],
-        [0, 9, 8, 0, 0, 0, 0, 6, 0],
-        [8, 0, 0, 0, 6, 0, 0, 0, 3],
-        [4, 0, 0, 8, 0, 3, 0, 0, 1],
-        [7, 0, 0, 0, 2, 0, 0, 0, 6],
-        [0, 6, 0, 0, 0, 0, 2, 8, 0],
-        [0, 0, 0, 4, 1, 9, 0, 0, 5],
-        [0, 0, 0, 0, 8, 0, 0, 7, 9]
-      ];
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.strokeStyle = '#cbd5e1';
-      ctx.lineWidth = 1.2;
-      for (let i = 0; i < 10; i++) {
-        ctx.beginPath();
-        ctx.moveTo(i * cell, 0);
-        ctx.lineTo(i * cell, canvas.height);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, i * cell);
-        ctx.lineTo(canvas.width, i * cell);
-        ctx.stroke();
-      }
-
-      ctx.lineWidth = 2.5;
-      for (let i = 0; i < 4; i++) {
-        ctx.beginPath();
-        ctx.moveTo((i * 3) * cell, 0);
-        ctx.lineTo((i * 3) * cell, canvas.height);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, (i * 3) * cell);
-        ctx.lineTo(canvas.width, (i * 3) * cell);
-        ctx.stroke();
-      }
-
-      ctx.fillStyle = '#f8fafc';
-      ctx.font = 'bold 20px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-
-      for (let row = 0; row < 9; row++) {
-        for (let col = 0; col < 9; col++) {
-          const val = board[row][col];
-          if (val !== 0) {
-            ctx.fillText(String(val), col * cell + cell / 2, row * cell + cell / 2);
-          }
-        }
-      }
-
-      ctx.strokeStyle = '#22c55e';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(selectedCell.x * cell + 2, selectedCell.y * cell + 2, cell - 4, cell - 4);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '13px sans-serif';
-      ctx.fillText('선택한 칸 기준으로 패턴을 읽어보는 스도쿠 데모', 16, canvas.height - 14);
-    }
-
-    function drawChessPreview() {
-      if (!activePreview || activePreview.type !== 'chess') return;
-      const { canvas, ctx, selectedSquare, recommendation } = activePreview;
-      const cell = canvas.width / 8;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      const board = [
-        ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
-        ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-        ['', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', ''],
-        ['', '', '', '', '', '', '', ''],
-        ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-        ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
-      ];
-
-      for (let row = 0; row < 8; row++) {
-        for (let col = 0; col < 8; col++) {
-          const x = col * cell;
-          const y = row * cell;
-          ctx.fillStyle = (row + col) % 2 === 0 ? '#f8f0d8' : '#8c5b35';
-          ctx.fillRect(x, y, cell, cell);
-
-          const piece = board[row][col];
-          if (piece) {
-            const glyph = {
-              K: '♔', Q: '♕', R: '♖', B: '♗', N: '♘', P: '♙',
-              k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟'
-            }[piece];
-            ctx.fillStyle = piece === piece.toUpperCase() ? '#fb7185' : '#f8fafc';
-            ctx.font = 'bold 28px serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(glyph, x + cell / 2, y + cell / 2);
-          }
-        }
-      }
-
-      if (selectedSquare) {
-        const file = selectedSquare.charCodeAt(0) - 97;
-        const rank = 8 - Number(selectedSquare[1]);
-        ctx.strokeStyle = '#22c55e';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(file * cell + 4, rank * cell + 4, cell - 8, cell - 8);
-      }
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 16px sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText('추천 수: ' + recommendation.from + ' → ' + recommendation.to, 16, 326);
-      ctx.font = '13px sans-serif';
-      ctx.fillStyle = '#cbd5e1';
-      ctx.fillText(recommendation.explanation, 16, 344);
-    }
-
-    function startCalculatorUI() {
-      const display = document.getElementById('calc-display');
-      const buttons = Array.from(document.querySelectorAll('.calc-button'));
-      if (!display || buttons.length === 0) return;
-
-      stopActivePreview();
-      activePreview = { type: 'calculator' };
-      let expression = '';
-
-      function setDisplay() {
-        display.textContent = expression || '0';
-      }
-
-      function sanitizeExpression(value) {
-        return value.replace(/[^0-9+\-*/.%()]/g, '');
-      }
-
-      function calculateResult() {
-        try {
-          expression = sanitizeExpression(expression || '0');
-          const result = Function(`"use strict"; return (${expression})`)();
-          expression = String(result);
-        } catch {
-          expression = 'Error';
-        }
-      }
-
-      buttons.forEach(button => {
-        button.addEventListener('click', () => {
-          const value = button.dataset.value;
-          if (value === 'clear') {
-            expression = '';
-          } else if (value === 'back') {
-            expression = expression.slice(0, -1);
-          } else if (value === 'equals') {
-            calculateResult();
-          } else {
-            if (expression === 'Error') expression = '';
-            expression += value;
-          }
-          setDisplay();
-        });
-      });
-
-      setDisplay();
-    }
-
-    function startCrossyRoadPreview() {
-      const canvas = document.getElementById('crossyroads-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-      activePreview = {
-        type: 'crossyroads',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        width: canvas.width,
-        height: canvas.height,
-        keys: {},
-        player: { x: canvas.width / 2 - 14, y: canvas.height - 50, w: 28, h: 28, speed: 220 },
-        lanes: 5,
-        laneHeight: 58,
-        cars: [],
-        score: 0,
-        gameOver: false,
-        lastTime: 0,
-        rafId: null
-      };
-
-      resetCrossyRoadPreview();
-      activePreview.rafId = requestAnimationFrame(loopCrossyRoadPreview);
-    }
-
-    function resetCrossyRoadPreview() {
-      if (!activePreview) return;
-
-      activePreview.player.x = activePreview.width / 2 - 14;
-      activePreview.player.y = activePreview.height - 50;
-      activePreview.cars = [];
-      activePreview.score = 0;
-      activePreview.gameOver = false;
-      activePreview.lastTime = 0;
-
-      const directions = [1, -1, 1, -1, 1];
-      for (let lane = 0; lane < activePreview.lanes; lane++) {
-        const laneY = activePreview.height - 110 - lane * activePreview.laneHeight;
-        const speed = 90 + lane * 18;
-        for (let i = 0; i < 3; i++) {
-          activePreview.cars.push({
-            x: (i * 150) + (lane % 2 === 0 ? 0 : 75),
-            y: laneY,
-            w: 48,
-            h: 28,
-            speed,
-            direction: directions[lane],
-            color: lane % 2 ? '#facc15' : '#38bdf8'
-          });
-        }
-      }
-    }
-
-    function updateCrossyRoadPreview(dt) {
-      const { keys, player, canvas, cars } = activePreview;
-
-      if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed * dt;
-      if (keys['ArrowRight'] && player.x + player.w < canvas.width) player.x += player.speed * dt;
-      if (keys['ArrowUp'] && player.y > 0) player.y -= player.speed * dt;
-      if (keys['ArrowDown'] && player.y + player.h < canvas.height) player.y += player.speed * dt;
-
-      player.x = Math.max(0, Math.min(canvas.width - player.w, player.x));
-      player.y = Math.max(0, Math.min(canvas.height - player.h, player.y));
-
-      for (const car of cars) {
-        car.x += car.speed * dt * car.direction;
-        if (car.direction > 0 && car.x > canvas.width + 20) car.x = -car.w - 20;
-        if (car.direction < 0 && car.x + car.w < -20) car.x = canvas.width + 20;
-      }
-
-      for (const car of cars) {
-        if (
-          player.x < car.x + car.w &&
-          player.x + player.w > car.x &&
-          player.y < car.y + car.h &&
-          player.y + player.h > car.y
-        ) {
-          activePreview.gameOver = true;
-        }
-      }
-
-      if (!activePreview.gameOver && player.y < 14) {
-        activePreview.score += 1;
-        player.x = canvas.width / 2 - 14;
-        player.y = canvas.height - 50;
-      }
-    }
-
-    function drawCrossyRoadPreview() {
-      const { ctx, width, height, player, cars, score, gameOver } = activePreview;
-
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, width, height);
-
-      ctx.fillStyle = '#334155';
-      for (let lane = 0; lane < activePreview.lanes; lane++) {
-        const y = height - 110 - lane * activePreview.laneHeight;
-        ctx.fillRect(0, y - 4, width, activePreview.laneHeight);
-      }
-
-      ctx.strokeStyle = '#94a3b8';
-      ctx.lineWidth = 2;
-      for (let lane = 0; lane <= activePreview.lanes; lane++) {
-        const y = height - 110 - lane * activePreview.laneHeight;
-        ctx.setLineDash([12, 10]);
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.stroke();
-      }
-      ctx.setLineDash([]);
-
-      ctx.fillStyle = '#10b981';
-      ctx.fillRect(0, 0, width, 40);
-      ctx.fillRect(0, height - 40, width, 40);
-
-      ctx.fillStyle = '#111827';
-      ctx.font = '600 18px sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText('CROSSY ROADS', 16, 26);
-      ctx.textAlign = 'right';
-      ctx.fillText(`Score: ${score}`, width - 16, 26);
-
-      ctx.fillStyle = '#fde68a';
-      ctx.fillRect(player.x, player.y, player.w, player.h);
-      ctx.fillStyle = '#111827';
-      ctx.font = '22px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('🐔', player.x + player.w / 2, player.y + player.h * 0.75);
-
-      for (const car of cars) {
-        ctx.fillStyle = car.color;
-        ctx.fillRect(car.x, car.y, car.w, car.h);
-        ctx.fillStyle = '#111827';
-        ctx.font = '20px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('🚗', car.x + car.w / 2, car.y + car.h * 0.75);
-      }
-
-      if (gameOver) {
-        ctx.fillStyle = 'rgba(0,0,0,0.65)';
-        ctx.fillRect(0, 0, width, height);
-        ctx.fillStyle = '#f8fafc';
-        ctx.font = 'bold 28px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('Game Over', width / 2, height / 2 - 10);
-        ctx.font = '16px sans-serif';
-        ctx.fillText('Enter 키를 눌러 다시 시작', width / 2, height / 2 + 22);
-      }
-    }
-
-    function loopCrossyRoadPreview(timestamp) {
-      if (!activePreview) return;
-
-      const dt = Math.min((timestamp - (activePreview.lastTime || timestamp)) / 1000, 0.03);
-      activePreview.lastTime = timestamp;
-
-      if (!activePreview.gameOver) {
-        updateCrossyRoadPreview(dt);
-      }
-      drawCrossyRoadPreview();
-      activePreview.rafId = requestAnimationFrame(loopCrossyRoadPreview);
-    }
-
-    function startMeteoPreview() {
-      const canvas = document.getElementById('meteo-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-
-      activePreview = {
-        type: 'meteo',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        keys: {},
-        player: {
-          x: canvas.width / 2 - 18,
-          y: canvas.height - 70,
-          w: 36,
-          h: 36,
-          speed: 260
-        },
-        meteors: [],
-        score: 0,
-        spawnTimer: 0,
-        gameOver: false,
-        lastTime: 0,
-        rafId: null
-      };
-
-      resetMeteoPreview();
-      activePreview.rafId = requestAnimationFrame(loopMeteoPreview);
-    }
-
-    function resetMeteoPreview() {
-      if (!activePreview) return;
-
-      activePreview.player = {
-        x: activePreview.canvas.width / 2 - 18,
-        y: activePreview.canvas.height - 70,
-        w: 36,
-        h: 36,
-        speed: 260
-      };
-      activePreview.meteors = [];
-      activePreview.score = 0;
-      activePreview.spawnTimer = 0;
-      activePreview.gameOver = false;
-      activePreview.lastTime = 0;
-    }
-
-    function updateMeteoPreview(dt) {
-      const { keys, player, canvas } = activePreview;
-
-      if (keys['ArrowLeft'] || keys['a'] || keys['A']) player.x -= player.speed * dt;
-      if (keys['ArrowRight'] || keys['d'] || keys['D']) player.x += player.speed * dt;
-      if (keys['ArrowUp'] || keys['w'] || keys['W']) player.y -= player.speed * dt;
-      if (keys['ArrowDown'] || keys['s'] || keys['S']) player.y += player.speed * dt;
-
-      player.x = Math.max(0, Math.min(canvas.width - player.w, player.x));
-      player.y = Math.max(0, Math.min(canvas.height - player.h, player.y));
-
-      activePreview.spawnTimer += dt;
-      if (activePreview.spawnTimer > 0.45) {
-        activePreview.meteors.push({
-          x: Math.random() * (canvas.width - 24),
-          y: -24,
-          size: 10 + Math.random() * 16,
-          speed: 140 + Math.random() * 180
-        });
-        activePreview.spawnTimer = 0;
-      }
-
-      activePreview.meteors.forEach(m => {
-        m.y += m.speed * dt;
-      });
-
-      activePreview.meteors = activePreview.meteors.filter(m => m.y < canvas.height + 30);
-      activePreview.score += dt * 12;
-
-      for (const m of activePreview.meteors) {
-        const hit =
-          player.x < m.x + m.size &&
-          player.x + player.w > m.x &&
-          player.y < m.y + m.size &&
-          player.y + player.h > m.y;
-
-        if (hit) {
-          activePreview.gameOver = true;
-          break;
-        }
-      }
-    }
-
-    function drawMeteoPreview() {
-      const { canvas, ctx, player, meteors, gameOver, score } = activePreview;
-
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, '#07111f');
-      gradient.addColorStop(1, '#0f2343');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 20px sans-serif';
-      ctx.fillText(`Score: ${Math.floor(score)}`, 16, 28);
-
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(player.x, player.y, player.w, player.h);
-
-      meteors.forEach(m => {
-        ctx.beginPath();
-        ctx.arc(m.x + m.size / 2, m.y + m.size / 2, m.size / 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#ff8c00';
-        ctx.fill();
-      });
-
-      if (gameOver) {
-        ctx.fillStyle = 'rgba(0,0,0,0.7)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 28px sans-serif';
-        ctx.fillText('Game Over', 110, 220);
-        ctx.font = '18px sans-serif';
-        ctx.fillText(`최종 점수: ${Math.floor(score)}`, 110, 255);
-        ctx.fillText('Enter 키로 다시 시작', 95, 295);
-      }
-    }
-
-    function loopMeteoPreview(timestamp) {
-      if (!activePreview) return;
-
-      const dt = Math.min((timestamp - (activePreview.lastTime || timestamp)) / 1000, 0.03);
-      activePreview.lastTime = timestamp;
-
-      if (!activePreview.gameOver) {
-        updateMeteoPreview(dt);
-      }
-
-      drawMeteoPreview();
-      activePreview.rafId = requestAnimationFrame(loopMeteoPreview);
-    }
-
-    function startGenericPreview(item) {
-      const canvas = document.getElementById('generic-preview-canvas');
-      if (!canvas) return;
-
-      stopActivePreview();
-
-      const isMath = item.category === 'math';
-      const baseColor = isMath ? '#0f172a' : '#111827';
-      const shapeColor = isMath ? '#f97316' : '#38bdf8';
-      const accentColor = isMath ? '#34d399' : '#f472b6';
-
-      activePreview = {
-        type: 'generic',
-        canvas,
-        ctx: canvas.getContext('2d'),
-        item,
-        lastTime: 0,
-        rafId: null,
-        shape: {
-          x: canvas.width / 2,
-          y: canvas.height / 2,
-          vx: 120,
-          vy: 90,
-          size: isMath ? 0 : 18,
-          angle: 0
-        },
-        baseColor,
-        shapeColor,
-        accentColor
-      };
-
-      activePreview.rafId = requestAnimationFrame(loopGenericPreview);
-    }
-
-    function updateGenericPreview(dt) {
-      const state = activePreview;
-      const { canvas, shape } = state;
-
-      shape.x += shape.vx * dt;
-      shape.y += shape.vy * dt;
-      shape.angle += dt * 1.8;
-
-      if (shape.x < shape.size || shape.x > canvas.width - shape.size) {
-        shape.vx *= -1;
-      }
-      if (shape.y < shape.size || shape.y > canvas.height - shape.size) {
-        shape.vy *= -1;
-      }
-    }
-
-    function drawGenericPreview() {
-      const state = activePreview;
-      const { canvas, ctx, shape, item, baseColor, shapeColor, accentColor } = state;
-
-      const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, baseColor);
-      gradient.addColorStop(1, '#111827');
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      if (item.category === 'math') {
-        ctx.fillStyle = accentColor;
-        ctx.font = 'bold 22px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('계산 로직 미리보기', canvas.width / 2, 60);
-        ctx.font = '16px sans-serif';
-        ctx.fillText('명확한 수학 흐름을 보여줍니다', canvas.width / 2, 90);
-
-        ctx.fillStyle = '#ffffff22';
-        roundRect(ctx, 40, 110, canvas.width - 80, 110, 14, true);
-
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '600 24px "Outfit", sans-serif';
-        ctx.fillText('1 + 2 + 3 + ... + n', canvas.width / 2, 150);
-        ctx.font = '500 16px "Outfit", sans-serif';
-        ctx.fillText('반복 구조와 누적 합산을 쉽게 이해하세요', canvas.width / 2, 180);
-
-        ctx.strokeStyle = '#ffffff33';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(50, 220);
-        ctx.lineTo(canvas.width - 50, 220);
-        ctx.stroke();
-      } else {
-        ctx.fillStyle = accentColor;
-        ctx.font = 'bold 26px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(item.icon, canvas.width / 2, 60);
-        ctx.font = '16px sans-serif';
-        ctx.fillText('간단한 게임 감각 미리보기', canvas.width / 2, 88);
-
-        ctx.save();
-        ctx.translate(shape.x, shape.y);
-        ctx.rotate(shape.angle);
-        ctx.fillStyle = shapeColor;
-        ctx.beginPath();
-        ctx.arc(0, 0, shape.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        ctx.strokeStyle = '#ffffff33';
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2 + 30, 60, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-    }
-
-    function loopGenericPreview(timestamp) {
-      if (!activePreview) return;
-
-      const dt = Math.min((timestamp - (activePreview.lastTime || timestamp)) / 1000, 0.03);
-      activePreview.lastTime = timestamp;
-
-      if (activePreview.item.category !== 'math') {
-        updateGenericPreview(dt);
-      }
-      drawGenericPreview();
-      activePreview.rafId = requestAnimationFrame(loopGenericPreview);
-    }
-
-    function roundRect(ctx, x, y, width, height, radius, fill) {
-      ctx.beginPath();
-      ctx.moveTo(x + radius, y);
-      ctx.lineTo(x + width - radius, y);
-      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-      ctx.lineTo(x + width, y + height - radius);
-      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      ctx.lineTo(x + radius, y + height);
-      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-      ctx.lineTo(x, y + radius);
-      ctx.quadraticCurveTo(x, y, x + radius, y);
-      ctx.closePath();
-      if (fill) ctx.fill(); else ctx.stroke();
-    }
-
-    window.addEventListener('keydown', (event) => {
-      if (!activePreview || !['meteo', 'crossyroads'].includes(activePreview.type)) return;
-
-      const moveKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', ' ', 'a', 'A', 'd', 'D', 'w', 'W', 's', 'S'];
-      if (moveKeys.includes(event.key)) {
-        event.preventDefault();
-      }
-
-      activePreview.keys[event.key] = true;
-
-      if (event.key === 'Enter') {
-        if (activePreview.type === 'meteo' && activePreview.gameOver) {
-          resetMeteoPreview();
-        }
-        if (activePreview.type === 'crossyroads' && activePreview.gameOver) {
-          resetCrossyRoadPreview();
-        }
-      }
-    });
-
-    window.addEventListener('keyup', (event) => {
-      if (activePreview?.type === 'meteo' || activePreview?.type === 'crossyroads') {
-        activePreview.keys[event.key] = false;
-      }
-    });
 
     function openModal(item) {
       currentSelectedMaterial = item;
-
+      
       modalTitle.textContent = item.title;
       modalDesc.textContent = item.description;
       modalCategory.textContent = item.category === 'coding' ? '코딩 게임 (Python)' : '수학 & 연산 (Math)';
       modalFilename.textContent = item.filename;
       modalTags.textContent = item.tags.map(t => `#${t}`).join(' ');
-
+      
       modalTerminalCmd.textContent = `python3 ${item.filename}`;
-
+      
+      // Default color hero
       if (item.category === 'math') {
         modalHero.className = 'modal-hero category-math';
         modalHeroIcon.textContent = '📐';
@@ -3792,21 +2793,21 @@ screen.mainloop()`
         modalTag.textContent = 'Coding Game';
       }
 
+      // Reset to Description Tab by default
       switchModalTab('desc');
-
+      
       modalOverlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden'; // Lock background scroll
     }
 
     function closeModal() {
-      stopActivePreview();
       modalOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+      document.body.style.overflow = ''; // Unlock scroll
       currentSelectedMaterial = null;
     }
 
     modalClose.addEventListener('click', closeModal);
-
+    
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) {
         closeModal();
@@ -3819,6 +2820,7 @@ screen.mainloop()`
       }
     });
 
+    // Copy terminal command button
     copyBtn.addEventListener('click', () => {
       const textToCopy = modalTerminalCmd.textContent.trim();
       navigator.clipboard.writeText(textToCopy).then(() => {
@@ -3834,6 +2836,7 @@ screen.mainloop()`
       });
     });
 
+    // Copy source code button
     copyCodeBtn.addEventListener('click', () => {
       if (!currentSelectedMaterial) return;
       navigator.clipboard.writeText(currentSelectedMaterial.code).then(() => {
@@ -3847,11 +2850,13 @@ screen.mainloop()`
       });
     });
 
+    // ==========================================
+    // Page Startup Init
+    // ==========================================
     initStats();
     renderGrid();
-    startQuiz();
-    visualizeEvenOdd();
+    startQuiz(); // start multiplication quiz
+    visualizeEvenOdd(); // initialize even/odd dot layout
   </script>
 </body>
 </html>
-```

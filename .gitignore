@@ -1,4 +1,16 @@
-# Track only the requested HTML file and this ignore file.
-*.html
+# Ignore OS generated files and temporary files
+.DS_Store
+.localized
+__pycache__/
+*.mov
+*.png
+*.vrblocks
+Desktop Goose*
+untitled folder*
+
+# Track project source files
 !.gitignore
-!라온.html
+!.nojekyll
+!*.html
+!*.py
+!*.md
